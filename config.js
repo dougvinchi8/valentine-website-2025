@@ -7,21 +7,35 @@ const CONFIG = {
   },
   questions: {
     first: {
-      text: "Você gosta de mim?",
-      yesBtn: "Talvez um pouquinho",
-      noBtn: "Ah, as vezes",
-      secretAnswer: "Eu não gosto de você, eu te amo! ❤️"
+      text: "Se você não me ama, então o que é essa carinha fofa que você faz quando me olha?",
+      yesBtn: "Já me pegou no flagra 💘",
+      noBtn: "Ops… resposta errada 🗡️",
+      secretAnswer: "Dá pra ver no seu olhar que você me ama!"
     },
     second: {
-      text: "Quanto você me ama?",
-      startText: "Assim!",
-      nextBtn: "Próximo ❤️"
+      text: "Você prefere: me dar um abraço apertado ou roubar meu sorvete?",
+      yesBtn: "Abraço apertado 😍",
+      noBtn: "Roubo do sorvete 🍦",
+      secretAnswer: "Cada opção me faz te amar mais!"
     },
     third: {
-      text: "Quer ser meu companheiro de vida pra sempre? Ultrapassando as dificuldades e barreiras 🌹",
-      yesBtn: "Sim!",
-      noBtn: "Não"
+      text: "Se eu fosse uma comida, você me comeria todo?",
+      yesBtn: "Comeria todo, meu amor!",
+      noBtn: "Chama o delivery 😂",
+      secretAnswer: "Mas eu prefiro te devorar com carinho!"
     }
+  },
+
+  // Mantendo como está
+  second: {
+    text: "Quanto você me ama?",
+    startText: "Assim!",
+    nextBtn: "Próximo ❤️"
+  },
+  third: {
+    text: "Quer ser meu companheiro de vida pra sempre? Ultrapassando as dificuldades e barreiras 🌹",
+    yesBtn: "Sim!",
+    noBtn: "Não"
   },
   loveMessages: {
     extreme: "Uau! Você me ama tanto assim?? 🥰🚀💝",
@@ -33,19 +47,22 @@ const CONFIG = {
     message: "Agora venha receber seu presente, um abraço bem quente e um beijo enorme!",
     emojis: "🎁💖🤗💝💋❤️💕"
   },
+
   colors: {
-    backgroundStart: "#ffafbd",
-    backgroundEnd: "#ffc3a0",
-    buttonBackground: "#ff6b6b",
-    buttonHover: "#ff8787",
-    textColor: "#ff4757"
+    backgroundStart: "#336633",
+    backgroundEnd: "#ff6699",
+    buttonBackground: "#c7af6b",
+    buttonHover: "#ff6699",
+    textColor: "#f6f4f3"
   },
+
   animations: {
     floatDuration: "15s",
     floatDistance: "50px",
     bounceSpeed: "0.5s",
     heartExplosionSize: 1.5
   },
+
   music: {
     enabled: true,
     autoplay: true,
@@ -57,3 +74,4 @@ const CONFIG = {
 };
 
 window.VALENTINE_CONFIG = CONFIG;
+
