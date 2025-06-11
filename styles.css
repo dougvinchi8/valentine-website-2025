@@ -316,3 +316,14 @@ h2 {
     transform: scale(1.05);
     background: var(--secondary-color);
 } 
+let wrongCount = 0;
+
+function handleWrongAnswer() {
+  wrongCount++;
+  if (wrongCount === 4) {
+    const arrow = document.createElement("div");
+    arrow.id = "hintArrow";
+    arrow.textContent = "⬇️";
+    document.body.appendChild(arrow);
+  }
+}
