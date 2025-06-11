@@ -25,7 +25,7 @@ function getDefaultColor(key) {
 
 // Contador "Juntos desde"
 function startTogetherTimer() {
-  const startDate = new Date(2025, 2, 17, 19, 30, 0);
+  const startDate = new Date(2022, 2, 17, 19, 30, 0);
   const el = document.getElementById("timer");
   if (!el) return;
   function update() {
