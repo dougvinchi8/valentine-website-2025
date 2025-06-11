@@ -8,8 +8,8 @@ const CONFIG = {
   questions: {
     first: {
       text: "Você gosta de mim?",
-      yesBtn: "Siim",
-      noBtn: "Nem pensar!",
+      yesBtn: "Talvez um pouquinho",
+      noBtn: "Ah, as vezes",
       secretAnswer: "Eu não gosto de você, eu te amo! ❤️"
     },
     second: {
