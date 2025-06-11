@@ -1,4 +1,3 @@
-// Initialize configuration
 const CONFIG = {
   valentineName: "Kevin",
   pageTitle: "Feliz dia dos Namorados meu amor",
@@ -7,7 +6,7 @@ const CONFIG = {
     bears: ['🧸','🐻']
   },
 
-  // 🎉 Perguntas engraçadas personalizadas
+  // Perguntas engraçadas personalizadas
   questions: {
     first: {
       text: "Se você não me ama, então o que é essa carinha fofa que você faz quando me olha?",
@@ -17,14 +16,15 @@ const CONFIG = {
     },
     second: {
       text: "Você prefere: me dar um abraço apertado ou roubar meu sorvete?",
-      yesBtn: "Me dar um abraço apertado",
-      noBtn: "Roubar meu sorvete 🍦",
+      yesBtn: "Roubo do sorvete 🍦",
+      noBtn: "Ops… resposta errada, tente de novo 🗡️",
       secretAnswer: "Cada opção me faz te amar mais!"
     },
     third: {
-      text: "Quanto você me ama?",
-      startText: "Assim!",
-      nextBtn: "Próximo ❤️"
+      text: "Se eu fosse uma comida, você me comeria todo?",
+      yesBtn: "Comeria todo, meu amor!",
+      noBtn: "Chama o delivery 😂",
+      secretAnswer: "Mas eu prefiro te devorar com carinho!"
     },
     fourth: {
       text: "Quer ser meu companheiro de vida pra sempre? Ultrapassando as dificuldades e barreiras 🌹",
