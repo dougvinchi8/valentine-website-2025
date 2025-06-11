@@ -1,3 +1,4 @@
+// Initialize configuration
 const CONFIG = {
   valentineName: "Kevin",
   pageTitle: "Feliz dia dos Namorados meu amor",
