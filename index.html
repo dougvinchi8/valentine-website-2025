@@ -1,87 +1,73 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Feliz dia dos Namorados meu amor</title>
-  <link rel="stylesheet" href="styles.css" />
-</head>
-<body>
-  <!-- Contador de tempo juntos -->
-  <div id="timer" style="font-size:1.2rem; color:#f6f4f3; margin: 1rem 0; text-align:center;"></div>
+// Initialize configuration
+const CONFIG = {
+  valentineName: "Kevin",
+  pageTitle: "Feliz dia dos Namorados meu amor",
+  floatingEmojis: {
+    hearts: ['❤️','💖','💝','💗','💓'],
+    bears: ['🧸','🐻']
+  },
 
-  <!-- Floating Background Elements -->
-  <div class="floating-elements"></div>
+  // 🎉 Perguntas engraçadas personalizadas
+  questions: {
+    first: {
+      text: "Se você não me ama, então o que é essa carinha fofa que você faz quando me olha?",
+      yesBtn: "Ah pronto! Tá se achando muito em Douglas",
+      noBtn: "Ops… resposta errada, tente de novo 🗡️",
+      secretAnswer: "É CLARO QUE EU TE AMO MEU AMOR"
+    },
+    second: {
+      text: "Você prefere: me dar um abraço apertado ou roubar meu sorvete?",
+      yesBtn: "Me dar um abraço apertado",
+      noBtn: "Roubar meu sorvete 🍦",
+      secretAnswer: "Cada opção me faz te amar mais!"
+    },
+    third: {
+      text: "Quanto você me ama?",
+      startText: "Assim!",
+      nextBtn: "Próximo ❤️"
+    },
+    fourth: {
+      text: "Quer ser meu companheiro de vida pra sempre? Ultrapassando as dificuldades e barreiras 🌹",
+      yesBtn: "Sim!",
+      noBtn: "Não"
+    }
+  },
 
-  <!-- Main Content Container -->
-  <div class="container">
-    <h1 id="valentineTitle"></h1>
+  loveMessages: {
+    extreme: "Uau! Você me ama tanto assim?? 🥰🚀💝",
+    high: "Até o infinito e além! 🚀💝",
+    normal: "E ainda mais! 🥰"
+  },
 
-    <!-- Pergunta 1 -->
-    <div class="question-section" id="question1">
-      <h2 id="question1Text"></h2>
-      <button class="cute-btn" id="yesBtn1"></button>
-      <button class="cute-btn" id="noBtn1"></button>
-      <div class="secret-answer">
-        <button class="cute-btn special" id="secretAnswerBtn" onclick="showNextQuestion(2)"></button>
-      </div>
-    </div>
+  celebration: {
+    title: "Irrul! Sou a pessoa mais feliz do mundo! 🎉💝💖💝💓",
+    message: "Agora venha receber seu presente, um abraço bem quente e um beijo enorme!",
+    emojis: "🎁💖🤗💝💋❤️💕"
+  },
 
-    <!-- Pergunta 2 (botões engraçados) -->
-    <div class="question-section hidden" id="question2">
-      <h2 id="question2Text"></h2>
-      <button class="cute-btn" id="yesBtn2"></button>
-      <button class="cute-btn" id="noBtn2"></button>
-    </div>
+  colors: {
+    backgroundStart: "#336633",
+    backgroundEnd: "#ff6699",
+    buttonBackground: "#c7af6b",
+    buttonHover: "#ff6699",
+    textColor: "#f6f4f3"
+  },
 
-    <!-- Pergunta 3 (Amorômetro slider) -->
-    <div class="question-section hidden" id="question3">
-      <h2 id="question3Text"></h2>
-      <div class="love-meter">
-        <input
-          type="range"
-          min="0"
-          max="10000"
-          value="100"
-          class="slider"
-          id="loveMeter"
-        />
-        <p>
-          <span class="love-value-container">
-            <span id="startText"></span> (<span id="loveValue">100</span>%)
-          </span>
-        </p>
-      </div>
-      <button class="cute-btn" id="nextBtn"></button>
-    </div>
+  animations: {
+    floatDuration: "15s",
+    floatDistance: "50px",
+    bounceSpeed: "0.5s",
+    heartExplosionSize: 1.5
+  },
 
-    <!-- Pergunta 4 (Pergunta final) -->
-    <div class="question-section hidden" id="question4">
-      <h2 id="question4Text"></h2>
-      <button class="cute-btn" id="yesBtn4"></button>
-      <button class="cute-btn" id="noBtn4"></button>
-    </div>
+  music: {
+    enabled: true,
+    autoplay: true,
+    musicUrl: "https://res.cloudinary.com/dncywqfpb/video/upload/v1738399057/music_qrhjvy.mp3",
+    startText: "🎵 Tocar música",
+    stopText: "🔇 Parar música",
+    volume: 0.5
+  }
+};
 
-    <!-- Mensagem de celebração -->
-    <div class="celebration hidden" id="celebration">
-      <h2 id="celebrationTitle"></h2>
-      <p class="celebration-text" id="celebrationMessage"></p>
-      <p class="celebration-text" id="celebrationEmojis"></p>
-    </div>
-  </div>
-
-  <!-- Música -->
-  <div id="musicControls" class="music-controls">
-    <button id="musicToggle" class="music-btn"></button>
-    <audio id="bgMusic" loop>
-      <source id="musicSource" type="audio/mpeg" />
-      Seu navegador não suporta áudio.
-    </audio>
-  </div>
-
-  <script src="config.js"></script>
-  <script src="theme.js"></script>
-  <script src="script.js"></script>
-</body>
-</html>
-
+window.VALENTINE_CONFIG = CONFIG;
