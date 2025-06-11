@@ -34,7 +34,7 @@ function startTogetherTimer() {
     const hrs = Math.floor((diff % 86400000) / 3600000);
     const mins = Math.floor((diff % 3600000) / 60000);
     const secs = Math.floor((diff % 60000) / 1000);
-    el.textContent = `Estamos juntos há ${days}d ${hrs}h ${mins}m ${secs}s`;
+    el.textContent = `Estamos juntos há ${days}dias ${hrs}horas ${mins}minutos ${secs}segundos`;
   }
   update();
   setInterval(update, 1000);
