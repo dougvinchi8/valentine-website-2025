@@ -11,32 +11,22 @@ const CONFIG = {
   questions: {
     first: {
       text: "Se você não me ama, então o que é essa carinha fofa que você faz quando me olha?",
-      noBtn: "Ah pronto! Tá se achando muito em Douglas",
+      yesBtn: "Ah pronto! Tá se achando muito em Douglas",
       noBtn: "Ops… resposta errada, tente de novo 🗡️",
       secretAnswer: "É CLARO QUE EU TE AMO MEU AMOR"
     },
     second: {
       text: "Você prefere: me dar um abraço apertado ou roubar meu sorvete?",
-      noBtn: "Roubo do sorvete 🍦",
-      noBtn: "Ops… resposta errada, tente de novo 🗡️",
+      yesBtn: "Me dar um abraço apertado",
+      noBtn: "Roubar meu sorvete 🍦",
       secretAnswer: "Cada opção me faz te amar mais!"
     },
     third: {
-      text: "Se eu fosse uma comida, você me comeria todo?",
-      noBtn: "Comeria todo, meu amor!",
-      noBtn: "Chama o delivery 😂",
-      secretAnswer: "Mas eu prefiro te devorar com carinho!"
-    }
-  },
-
-  // 📏 Amorômetro e pergunta final originais
-  meter: {
-    loveMeter: {
       text: "Quanto você me ama?",
       startText: "Assim!",
       nextBtn: "Próximo ❤️"
     },
-    finalQuestion: {
+    fourth: {
       text: "Quer ser meu companheiro de vida pra sempre? Ultrapassando as dificuldades e barreiras 🌹",
       yesBtn: "Sim!",
       noBtn: "Não"
