@@ -34,7 +34,7 @@ function startTogetherTimer() {
     const hrs = Math.floor((diff % 86400000) / 3600000);
     const mins = Math.floor((diff % 3600000) / 60000);
     const secs = Math.floor((diff % 60000) / 1000);
-    el.textContent = `Estamos juntos há ${days} dias ${hrs} horas ${mins} minutos ${secs} segundos`;
+    el.textContent = `Estamos juntos há ${days}dias ${hrs}horas ${mins}minutos ${secs}segundos`;
   }
   update();
   setInterval(update, 1000);
@@ -69,50 +69,56 @@ window.addEventListener("DOMContentLoaded", () => {
     q1.textContent = config.questions.first.text;
     y1.textContent = config.questions.first.yesBtn;
     n1.textContent = config.questions.first.noBtn;
-
-    // Botão "sim" avança para próxima pergunta
-    y1.onclick = () => {
-      showNextQuestion(2);
-    };
-
-    // Botão "não" se move e conta erros
-    n1.onclick = () => {
-      handleWrongAnswer();
-      moveButton(n1);
-    };
+    y1.onclick = () => showNextQuestion(2);
+    n1.onclick = () => { handleWrongAnswer(); moveButton(n1); };
     s1.textContent = config.questions.first.secretAnswer;
   }
 
-  // Pergunta 2
+  // Pergunta 2 - botões (pergunta engraçada)
   const q2 = document.getElementById("question2Text");
-  const st = document.getElementById("startText");
-  const nxt = document.getElementById("nextBtn");
-  const n2 = document.getElementById("noBtn2");
-  if (q2 && st && nxt) {
+  const yesBtn2 = document.getElementById("yesBtn2");
+  const noBtn2 = document.getElementById("noBtn2");
+  if (q2 && yesBtn2 && noBtn2) {
     q2.textContent = config.questions.second.text;
-    st.textContent = config.questions.second.startText;
-    nxt.textContent = config.questions.second.nextBtn;
-    if (n2) {
-      n2.textContent = config.questions.second.noBtn || "Não";
-      n2.onclick = () => {
-        handleWrongAnswer();
-        moveButton(n2);
-      };
-    }
+    yesBtn2.textContent = config.questions.second.yesBtn;
+    noBtn2.textContent = config.questions.second.noBtn;
+    yesBtn2.onclick = () => showNextQuestion(3);
+    noBtn2.onclick = () => { handleWrongAnswer(); moveButton(noBtn2); };
   }
 
-  // Pergunta 3
+  // Pergunta 3 - slider (amorômetro)
   const q3 = document.getElementById("question3Text");
-  const y3 = document.getElementById("yesBtn3");
-  const n3 = document.getElementById("noBtn3");
-  if (q3 && y3 && n3) {
-    q3.textContent = config.questions.third.text;
-    y3.textContent = config.questions.third.yesBtn;
-    n3.textContent = config.questions.third.noBtn;
-    n3.onclick = () => {
-      handleWrongAnswer();
-      moveButton(n3);
-    };
+  const loveMeter = document.getElementById("loveMeter");
+  const loveValue = document.getElementById("loveValue");
+  const startText = document.getElementById("startText");
+  const nextBtn = document.getElementById("nextBtn");
+  if (q3 && loveMeter && loveValue && startText && nextBtn) {
+    q3.textContent = config.meter.loveMeter.text;
+    startText.textContent = config.meter.loveMeter.startText;
+    nextBtn.textContent = config.meter.loveMeter.nextBtn;
+
+    loveMeter.value = 100;
+    loveValue.textContent = 100;
+
+    loveMeter.addEventListener("input", () => {
+      const val = parseInt(loveMeter.value);
+      loveValue.textContent = val;
+      // Você pode colocar lógica para mensagens com base no valor
+    });
+
+    nextBtn.onclick = () => showNextQuestion(4);
+  }
+
+  // Pergunta 4 - final
+  const q4 = document.getElementById("question4Text");
+  const y4 = document.getElementById("yesBtn4");
+  const n4 = document.getElementById("noBtn4");
+  if (q4 && y4 && n4) {
+    q4.textContent = config.meter.finalQuestion.text;
+    y4.textContent = config.meter.finalQuestion.yesBtn;
+    n4.textContent = config.meter.finalQuestion.noBtn;
+    y4.onclick = () => celebrate();
+    n4.onclick = () => { handleWrongAnswer(); moveButton(n4); };
   }
 
   createFloatingElements();
