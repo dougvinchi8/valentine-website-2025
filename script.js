@@ -23,13 +23,11 @@ function getDefaultColor(key) {
   return defaults[key] || "#fff";
 }
 
-// Page title
-document.title = config.pageTitle;
-
 // Contador "Juntos desde"
 function startTogetherTimer() {
   const startDate = new Date(2025, 2, 17, 19, 30, 0);
   const el = document.getElementById("timer");
+  if (!el) return;
   function update() {
     const diff = Date.now() - startDate;
     const days = Math.floor(diff / 86400000);
@@ -46,7 +44,7 @@ function startTogetherTimer() {
 let wrongCount = 0;
 function handleWrongAnswer() {
   wrongCount++;
-  if (wrongCount === 4) {
+  if (wrongCount === 4 && !document.getElementById("hintArrow")) {
     const arrow = document.createElement("div");
     arrow.id = "hintArrow";
     arrow.textContent = "⬇️";
@@ -59,37 +57,50 @@ window.addEventListener("DOMContentLoaded", () => {
   validateConfig();
   startTogetherTimer();
 
-  document.getElementById("valentineTitle").textContent = `${config.valentineName}, meu amor...`;
+  const title = document.getElementById("valentineTitle");
+  if (title) title.textContent = `${config.valentineName}, meu amor...`;
 
   // Pergunta 1
-  document.getElementById("question1Text").textContent = config.questions.first.text;
-  document.getElementById("yesBtn1").textContent = config.questions.first.yesBtn;
-  const noBtn1 = document.getElementById("noBtn1");
-  noBtn1.textContent = config.questions.first.noBtn;
-  noBtn1.onclick = () => { handleWrongAnswer(); moveButton(noBtn1); };
-  document.getElementById("secretAnswerBtn").textContent = config.questions.first.secretAnswer;
+  const q1 = document.getElementById("question1Text");
+  const y1 = document.getElementById("yesBtn1");
+  const n1 = document.getElementById("noBtn1");
+  const s1 = document.getElementById("secretAnswerBtn");
+  if (q1 && y1 && n1 && s1) {
+    q1.textContent = config.questions.first.text;
+    y1.textContent = config.questions.first.yesBtn;
+    n1.textContent = config.questions.first.noBtn;
+    n1.onclick = () => { handleWrongAnswer(); moveButton(n1); };
+    s1.textContent = config.questions.first.secretAnswer;
+  }
 
-  // Pergunta 2 (Love Meter)
-  document.getElementById("question2Text").textContent = config.questions.second.text;
-  document.getElementById("startText").textContent = config.questions.second.startText;
-  document.getElementById("nextBtn").textContent = config.questions.second.nextBtn;
-  const noBtn2 = document.getElementById("noBtn2");
-  if (noBtn2) noBtn2.onclick = () => { handleWrongAnswer(); moveButton(noBtn2); };
+  // Pergunta 2
+  const q2 = document.getElementById("question2Text");
+  const st = document.getElementById("startText");
+  const nxt = document.getElementById("nextBtn");
+  if (q2 && st && nxt) {
+    q2.textContent = config.questions.second.text;
+    st.textContent = config.questions.second.startText;
+    nxt.textContent = config.questions.second.nextBtn;
+  }
 
   // Pergunta 3
-  document.getElementById("question3Text").textContent = config.questions.third.text;
-  document.getElementById("yesBtn3").textContent = config.questions.third.yesBtn;
-  const noBtn3 = document.getElementById("noBtn3");
-  noBtn3.textContent = config.questions.third.noBtn;
-  noBtn3.onclick = () => { handleWrongAnswer(); moveButton(noBtn3); };
+  const q3 = document.getElementById("question3Text");
+  const y3 = document.getElementById("yesBtn3");
+  const n3 = document.getElementById("noBtn3");
+  if (q3 && y3 && n3) {
+    q3.textContent = config.questions.third.text;
+    y3.textContent = config.questions.third.yesBtn;
+    n3.textContent = config.questions.third.noBtn;
+    n3.onclick = () => { handleWrongAnswer(); moveButton(n3); };
+  }
 
   createFloatingElements();
   setupMusicPlayer();
 });
 
-// Floating elements
 function createFloatingElements() {
   const container = document.querySelector(".floating-elements");
+  if (!container) return;
   config.floatingEmojis.hearts.forEach(emoji => {
     const d = document.createElement("div");
     d.className = "heart";
@@ -114,7 +125,8 @@ function setRandomPosition(el) {
 
 function showNextQuestion(num) {
   document.querySelectorAll(".question-section").forEach(q => q.classList.add("hidden"));
-  document.getElementById(`question${num}`).classList.remove("hidden");
+  const section = document.getElementById(`question${num}`);
+  if (section) section.classList.remove("hidden");
 }
 
 function moveButton(button) {
@@ -128,15 +140,20 @@ function celebrate() {
   if (arrow) arrow.remove();
   document.querySelectorAll(".question-section").forEach(q => q.classList.add("hidden"));
   const celebration = document.getElementById("celebration");
+  if (!celebration) return;
   celebration.classList.remove("hidden");
-  document.getElementById("celebrationTitle").textContent = config.celebration.title;
-  document.getElementById("celebrationMessage").textContent = config.celebration.message;
-  document.getElementById("celebrationEmojis").textContent = config.celebration.emojis;
+  const t = document.getElementById("celebrationTitle");
+  const m = document.getElementById("celebrationMessage");
+  const e = document.getElementById("celebrationEmojis");
+  if (t) t.textContent = config.celebration.title;
+  if (m) m.textContent = config.celebration.message;
+  if (e) e.textContent = config.celebration.emojis;
   createHeartExplosion();
 }
 
 function createHeartExplosion() {
   const container = document.querySelector(".floating-elements");
+  if (!container) return;
   for (let i = 0; i < 50; i++) {
     const d = document.createElement("div");
     d.className = "heart";
@@ -150,12 +167,12 @@ function setupMusicPlayer() {
   const musicToggle = document.getElementById("musicToggle");
   const bgMusic = document.getElementById("bgMusic");
   const musicSource = document.getElementById("musicSource");
-  if (!config.music.enabled) return;
+  if (!config.music.enabled || !musicToggle || !bgMusic || !musicSource) return;
   musicSource.src = config.music.musicUrl;
   bgMusic.volume = config.music.volume;
   bgMusic.load();
   if (config.music.autoplay) {
-    const p = bgMusic.play().catch(() => musicToggle.textContent = config.music.startText);
+    bgMusic.play().catch(() => musicToggle.textContent = config.music.startText);
   }
   musicToggle.addEventListener("click", () => {
     if (bgMusic.paused) {
@@ -167,3 +184,4 @@ function setupMusicPlayer() {
     }
   });
 }
+
