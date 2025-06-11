@@ -11,19 +11,19 @@ const CONFIG = {
   questions: {
     first: {
       text: "Se você não me ama, então o que é essa carinha fofa que você faz quando me olha?",
-      yesBtn: "Ah pronto! Tá se achando muito em Douglas",
+      noBtn: "Ah pronto! Tá se achando muito em Douglas",
       noBtn: "Ops… resposta errada, tente de novo 🗡️",
       secretAnswer: "É CLARO QUE EU TE AMO MEU AMOR"
     },
     second: {
       text: "Você prefere: me dar um abraço apertado ou roubar meu sorvete?",
-      yesBtn: "Roubo do sorvete 🍦",
+      noBtn: "Roubo do sorvete 🍦",
       noBtn: "Ops… resposta errada, tente de novo 🗡️",
       secretAnswer: "Cada opção me faz te amar mais!"
     },
     third: {
       text: "Se eu fosse uma comida, você me comeria todo?",
-      yesBtn: "Comeria todo, meu amor!",
+      noBtn: "Comeria todo, meu amor!",
       noBtn: "Chama o delivery 😂",
       secretAnswer: "Mas eu prefiro te devorar com carinho!"
     }
