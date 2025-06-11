@@ -1,7 +1,6 @@
-// Initialize configuration
 const config = window.VALENTINE_CONFIG;
 
-// Validate configuration
+// Validate config colors
 function validateConfig() {
   const warnings = [];
   const isValidHex = (hex) => /^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/.test(hex);
@@ -11,19 +10,7 @@ function validateConfig() {
   if (warnings.length) console.warn("⚠️ Config Warnings:", warnings);
 }
 
-// Default color fallback
-function getDefaultColor(key) {
-  const defaults = {
-    backgroundStart: "#ffafbd",
-    backgroundEnd: "#ffc3a0",
-    buttonBackground: "#ff6b6b",
-    buttonHover: "#ff8787",
-    textColor: "#ff4757"
-  };
-  return defaults[key] || "#fff";
-}
-
-// Contador "Juntos desde"
+// Timer "Juntos desde"
 function startTogetherTimer() {
   const startDate = new Date(2022, 2, 17, 19, 30, 0);
   const el = document.getElementById("timer");
@@ -40,7 +27,21 @@ function startTogetherTimer() {
   setInterval(update, 1000);
 }
 
-// Seta após 4 erros
+// Show next question and hide others
+function showNextQuestion(num) {
+  document.querySelectorAll(".question-section").forEach(q => q.classList.add("hidden"));
+  const section = document.getElementById(`question${num}`);
+  if (section) section.classList.remove("hidden");
+}
+
+// Move button function (quando clica em "Não")
+function moveButton(button) {
+  button.style.position = "fixed";
+  button.style.left = `${Math.random() * (window.innerWidth - button.offsetWidth)}px`;
+  button.style.top = `${Math.random() * (window.innerHeight - button.offsetHeight)}px`;
+}
+
+// Contador de erros para mostrar a seta
 let wrongCount = 0;
 function handleWrongAnswer() {
   wrongCount++;
@@ -52,7 +53,6 @@ function handleWrongAnswer() {
   }
 }
 
-// DOM Loaded
 window.addEventListener("DOMContentLoaded", () => {
   validateConfig();
   startTogetherTimer();
@@ -68,56 +68,52 @@ window.addEventListener("DOMContentLoaded", () => {
   if (q1 && y1 && n1 && s1) {
     q1.textContent = config.questions.first.text;
     y1.textContent = config.questions.first.yesBtn;
-    n1.textContent = config.questions.first.noBtn;
     y1.onclick = () => showNextQuestion(2);
+    n1.textContent = config.questions.first.noBtn;
     n1.onclick = () => { handleWrongAnswer(); moveButton(n1); };
     s1.textContent = config.questions.first.secretAnswer;
   }
 
-  // Pergunta 2 - botões (pergunta engraçada)
+  // Pergunta 2
   const q2 = document.getElementById("question2Text");
-  const yesBtn2 = document.getElementById("yesBtn2");
-  const noBtn2 = document.getElementById("noBtn2");
-  if (q2 && yesBtn2 && noBtn2) {
+  const y2 = document.getElementById("yesBtn2");
+  const n2 = document.getElementById("noBtn2");
+  if (q2 && y2 && n2) {
     q2.textContent = config.questions.second.text;
-    yesBtn2.textContent = config.questions.second.yesBtn;
-    noBtn2.textContent = config.questions.second.noBtn;
-    yesBtn2.onclick = () => showNextQuestion(3);
-    noBtn2.onclick = () => { handleWrongAnswer(); moveButton(noBtn2); };
+    y2.textContent = config.questions.second.yesBtn;
+    y2.onclick = () => showNextQuestion(3);
+    n2.textContent = config.questions.second.noBtn;
+    n2.onclick = () => { handleWrongAnswer(); moveButton(n2); };
   }
 
-  // Pergunta 3 - slider (amorômetro)
+  // Pergunta 3 (Amorômetro)
   const q3 = document.getElementById("question3Text");
   const loveMeter = document.getElementById("loveMeter");
-  const loveValue = document.getElementById("loveValue");
   const startText = document.getElementById("startText");
+  const loveValue = document.getElementById("loveValue");
   const nextBtn = document.getElementById("nextBtn");
-  if (q3 && loveMeter && loveValue && startText && nextBtn) {
-    q3.textContent = config.meter.loveMeter.text;
-    startText.textContent = config.meter.loveMeter.startText;
-    nextBtn.textContent = config.meter.loveMeter.nextBtn;
-
-    loveMeter.value = 100;
-    loveValue.textContent = 100;
-
+  if (q3 && loveMeter && startText && loveValue && nextBtn) {
+    q3.textContent = config.questions.third.text;
+    startText.textContent = config.questions.third.startText;
+    loveValue.textContent = loveMeter.value;
     loveMeter.addEventListener("input", () => {
-      const val = parseInt(loveMeter.value);
-      loveValue.textContent = val;
-      // Você pode colocar lógica para mensagens com base no valor
+      loveValue.textContent = loveMeter.value;
     });
-
+    nextBtn.textContent = config.questions.third.nextBtn;
     nextBtn.onclick = () => showNextQuestion(4);
   }
 
-  // Pergunta 4 - final
+  // Pergunta 4 (final)
   const q4 = document.getElementById("question4Text");
   const y4 = document.getElementById("yesBtn4");
   const n4 = document.getElementById("noBtn4");
   if (q4 && y4 && n4) {
-    q4.textContent = config.meter.finalQuestion.text;
-    y4.textContent = config.meter.finalQuestion.yesBtn;
-    n4.textContent = config.meter.finalQuestion.noBtn;
-    y4.onclick = () => celebrate();
+    q4.textContent = config.questions.fourth.text;
+    y4.textContent = config.questions.fourth.yesBtn;
+    y4.onclick = () => {
+      celebrate();
+    };
+    n4.textContent = config.questions.fourth.noBtn;
     n4.onclick = () => { handleWrongAnswer(); moveButton(n4); };
   }
 
@@ -148,18 +144,6 @@ function setRandomPosition(el) {
   el.style.left = `${Math.random() * 100}vw`;
   el.style.animationDelay = `${Math.random() * 5}s`;
   el.style.animationDuration = `${10 + Math.random() * 20}s`;
-}
-
-function showNextQuestion(num) {
-  document.querySelectorAll(".question-section").forEach(q => q.classList.add("hidden"));
-  const section = document.getElementById(`question${num}`);
-  if (section) section.classList.remove("hidden");
-}
-
-function moveButton(button) {
-  button.style.position = "fixed";
-  button.style.left = `${Math.random() * (window.innerWidth - button.offsetWidth)}px`;
-  button.style.top = `${Math.random() * (window.innerHeight - button.offsetHeight)}px`;
 }
 
 function celebrate() {
