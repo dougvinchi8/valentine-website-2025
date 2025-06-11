@@ -11,6 +11,40 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <!-- Botão para iniciar música -->
+<button id="playMusicBtn" style="display:none;">🎵 Tocar música</button>
+
+<!-- iframe invisible com autoplay (muted) -->
+<iframe id="ytPlayer" width="0" height="0"
+  src=""
+  allow="autoplay"
+  style="display:none;"></iframe>
+
+<script>
+  // Cria a URL com autoplay + mute
+  const playBtn = document.getElementById("playMusicBtn");
+  const player = document.getElementById("ytPlayer");
+  const videoId = "_6YCNd3ONUU"; // seu vídeo
+
+  function initMusic() {
+    const src = `https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1&loop=1&playlist=${videoId}`;
+    player.src = src;
+    player.style.display = "block"; // opcional deixar invisível total ainda
+    playBtn.style.display = "none";
+  }
+
+  // Tenta tocar automaticamente ao carregar
+  window.addEventListener("DOMContentLoaded", () => {
+    setTimeout(initMusic, 1000);
+  });
+
+  // Se navegador bloquear, mostra o botão
+  playBtn.style.display = "block";
+  playBtn.addEventListener("click", () => {
+    initMusic();
+  });
+</script>
+
     <!-- Floating Background Elements -->
     <div class="floating-elements">
         <!-- Hearts and bears will be added here by JavaScript -->
