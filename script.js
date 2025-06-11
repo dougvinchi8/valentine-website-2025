@@ -34,7 +34,7 @@ function startTogetherTimer() {
     const hrs = Math.floor((diff % 86400000) / 3600000);
     const mins = Math.floor((diff % 3600000) / 60000);
     const secs = Math.floor((diff % 60000) / 1000);
-    el.textContent = `Estamos juntos há ${days}dias ${hrs}horas ${mins}minutos ${secs}segundos`;
+    el.textContent = `Estamos juntos há ${days} dias ${hrs} horas ${mins} minutos ${secs} segundos`;
   }
   update();
   setInterval(update, 1000);
@@ -69,7 +69,17 @@ window.addEventListener("DOMContentLoaded", () => {
     q1.textContent = config.questions.first.text;
     y1.textContent = config.questions.first.yesBtn;
     n1.textContent = config.questions.first.noBtn;
-    n1.onclick = () => { handleWrongAnswer(); moveButton(n1); };
+
+    // Botão "sim" avança para próxima pergunta
+    y1.onclick = () => {
+      showNextQuestion(2);
+    };
+
+    // Botão "não" se move e conta erros
+    n1.onclick = () => {
+      handleWrongAnswer();
+      moveButton(n1);
+    };
     s1.textContent = config.questions.first.secretAnswer;
   }
 
@@ -77,10 +87,18 @@ window.addEventListener("DOMContentLoaded", () => {
   const q2 = document.getElementById("question2Text");
   const st = document.getElementById("startText");
   const nxt = document.getElementById("nextBtn");
+  const n2 = document.getElementById("noBtn2");
   if (q2 && st && nxt) {
     q2.textContent = config.questions.second.text;
     st.textContent = config.questions.second.startText;
     nxt.textContent = config.questions.second.nextBtn;
+    if (n2) {
+      n2.textContent = config.questions.second.noBtn || "Não";
+      n2.onclick = () => {
+        handleWrongAnswer();
+        moveButton(n2);
+      };
+    }
   }
 
   // Pergunta 3
@@ -91,7 +109,10 @@ window.addEventListener("DOMContentLoaded", () => {
     q3.textContent = config.questions.third.text;
     y3.textContent = config.questions.third.yesBtn;
     n3.textContent = config.questions.third.noBtn;
-    n3.onclick = () => { handleWrongAnswer(); moveButton(n3); };
+    n3.onclick = () => {
+      handleWrongAnswer();
+      moveButton(n3);
+    };
   }
 
   createFloatingElements();
@@ -184,4 +205,3 @@ function setupMusicPlayer() {
     }
   });
 }
-
